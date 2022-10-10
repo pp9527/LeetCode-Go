@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
  * @Description:
  * @FileName: Solution
  */
-public class Solution {
+public class CodeCapricorns {
 
     // 473
     public boolean makeSquare(int[] matchsticks) {
@@ -2135,7 +2135,7 @@ public class Solution {
 
     public static void main(String[] args) {
         int[] next = new int[10];
-        Solution solution = new Solution();
+        CodeCapricorns solution = new CodeCapricorns();
         int[][] ints = new int[][]{
                 {0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0},
