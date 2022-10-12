@@ -13,6 +13,52 @@ import java.util.stream.IntStream;
  */
 public class CodeCapricorns {
 
+    /**
+     * @Description: 704. 二分查找
+     * @author pwz
+     * @date 2022/10/12 10:03
+     * @param nums
+     * @param target
+     * @return int
+     */
+    public int search(int[] nums, int target) { // 二分查找
+        int low = 0, high = nums.length - 1;
+        while (low <= high) {
+            int mid = (high - low) / 2 + low;
+            int num = nums[mid];
+            if (num == target) return mid;
+            else if (num > target) high = mid - 1;
+            else if (num < target) low = mid + 1;
+        }
+        return -1;
+    }
+
+    /**
+     * @Description: 27. 移除元素
+     * @author pwz
+     * @date 2022/10/12 10:06
+     * @param nums
+     * @param val
+     * @return int
+     */
+    public int removeElement(int[] nums, int val) { // 双指针
+        int pre = 0, n = nums.length;
+        for (int i = 0; i < n; i++) {
+            if (nums[i] != val) {
+                nums[pre] = nums[i];
+                pre++;
+            }
+        }
+        return pre;
+    }
+
+
+
+
+
+
+
+
     // 473
     public boolean makeSquare(int[] matchsticks) {
         int total = Arrays.stream(matchsticks).sum();

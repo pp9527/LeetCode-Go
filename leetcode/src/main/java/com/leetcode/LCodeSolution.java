@@ -931,20 +931,6 @@ public class LCodeSolution {
         return pre;
     }
 
-    // 26
-    public int removeDuplicates(int[] nums) {
-        if (nums.length == 0) return 0;
-        int fast = 1, slow = 1;
-        for (int i = 1;i < nums.length;i++) {
-            if (nums[i] != nums[i - 1]) {
-                nums[slow] = nums[fast];
-                slow++;
-            }
-            fast++;
-        }
-        return slow;
-    }
-
     // 208
     class Trie {
         /**
@@ -1277,19 +1263,6 @@ public class LCodeSolution {
             }
         }
         return count;
-    }
-
-    // 34
-    public int[] searchRange(int[] nums, int target) {
-        /**
-         * 对撞指针
-         */
-        if (nums.length == 0) return new int[] {-1, -1};
-        int low = 0, high = nums.length - 1;
-        while (low < high && nums[low] != target) low++;
-        while (low < high && nums[high] != target) high--;
-        if (low == high && nums[low] != target) return new int[] {-1, -1};
-        return new int[] {low, high};
     }
 
     // offer 61
@@ -1784,19 +1757,6 @@ public class LCodeSolution {
             }
         }
         return ans;
-    }
-
-    // 704
-    public int search704(int[] nums, int target) {
-        int low = 0, high = nums.length - 1;
-        while (low <= high) {
-            int mid = (high - low) / 2 + low;
-            int num = nums[mid];
-            if (num == target) return mid;
-            else if (num > target) high = mid - 1;
-            else if (num < target) low = mid + 1;
-        }
-        return -1;
     }
 
     // 977

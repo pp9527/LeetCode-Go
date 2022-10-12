@@ -13,7 +13,7 @@ public class Hot100Test {
     private Hot100 hot100;
 
     {
-        this.hot100 = new Hot100();
+        hot100 = new Hot100();
     }
 
     @Test
