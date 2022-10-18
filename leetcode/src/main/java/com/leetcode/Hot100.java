@@ -121,4 +121,22 @@ public class Hot100 {
         }
         return ans;
     }
+
+    /**
+     * @param height
+     * @return int
+     * @Description: 11. 盛最多水的容器
+     * @author pwz
+     * @date 2022/10/18 11:05
+     */
+    public int maxArea(int[] height) { // 双指针
+        int left = 0, right = height.length - 1;
+        int res = 0;
+        while (left < right) {
+            res = height[left] <= height[right] ?
+                    Math.max(res, (right - left) * height[left++]) :
+                    Math.max(res, (right - left) * height[right--]);
+        }
+        return res;
+    }
 }

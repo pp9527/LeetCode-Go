@@ -1,5 +1,6 @@
 package com.leetcode;
 
+import com.utils.ListNode;
 import com.utils.TreeNode;
 
 import java.util.*;
@@ -14,14 +15,14 @@ import java.util.stream.IntStream;
 public class CodeCapricorns {
 
     /**
-     * @Description: 704. 二分查找
-     * @author pwz
-     * @date 2022/10/12 10:03
      * @param nums
      * @param target
      * @return int
+     * @Description: 704. 二分查找
+     * @author pwz
+     * @date 2022/10/12 10:03
      */
-    public int search(int[] nums, int target) { // 二分查找
+    public int search(int[] nums, int target) { // 二分查找 O(n)
         int low = 0, high = nums.length - 1;
         while (low <= high) {
             int mid = (high - low) / 2 + low;
@@ -34,14 +35,14 @@ public class CodeCapricorns {
     }
 
     /**
-     * @Description: 27. 移除元素
-     * @author pwz
-     * @date 2022/10/12 10:06
      * @param nums
      * @param val
      * @return int
+     * @Description: 27. 移除元素
+     * @author pwz
+     * @date 2022/10/12 10:06
      */
-    public int removeElement(int[] nums, int val) { // 双指针
+    public int removeElement(int[] nums, int val) { // 双指针 O(n)
         int pre = 0, n = nums.length;
         for (int i = 0; i < n; i++) {
             if (nums[i] != val) {
@@ -52,11 +53,135 @@ public class CodeCapricorns {
         return pre;
     }
 
+    /**
+     * @param nums
+     * @return int[]
+     * @Description: 977. 有序数组的平方
+     * @author pwz
+     * @date 2022/10/18 9:43
+     */
+    public int[] sortedSquares(int[] nums) { // 双指针 O(n)
+        int left = 0, right = nums.length - 1;
+        int[] ans = new int[right + 1];
+        for (int i = right; i >= 0; i--) {
+            int res1 = nums[left] * nums[left], res2 = nums[right] * nums[right];
+            if (res1 > res2) {
+                ans[i] = res1;
+                left++;
+            } else {
+                ans[i] = res2;
+                right--;
+            }
+        }
+        return ans;
+    }
 
+    /**
+     * @param target
+     * @param nums
+     * @return int
+     * @Description: 209. 长度最小的子数组
+     * @author pwz
+     * @date 2022/10/18 9:52
+     */
+    public int minSubArrayLen(int target, int[] nums) { // 滑动窗口 O(n)
+        int ans = Integer.MAX_VALUE;
+        int sum = 0;
+        int left = 0;
+        for (int right = 0; right < nums.length; right++) {
+            sum += nums[right];
+            while (sum >= target) {
+                ans = Math.min(ans, right - left + 1);
+                sum -= nums[left++];
+            }
+        }
+        return ans == Integer.MAX_VALUE ? 0 : ans;
+    }
 
+    /**
+     * @param n
+     * @return int[][]
+     * @Description: 59. 螺旋矩阵 II
+     * @author pwz
+     * @date 2022/10/18 9:53
+     */
+    public int[][] generateMatrix(int n) {
+        int[][] res = new int[n][n];
+        int start = 0;
+        int loop = 0;
+        int count = 1;
+        int i, j;
+        while (loop++ < n / 2) {
+            for (j = start; j < n - loop; j++) {
+                res[start][j] = count++;
+            }
+            for (i = start; i < n - loop; i++) {
+                res[i][j] = count++;
+            }
+            for (; j >= loop; j--) {
+                res[i][j] = count++;
+            }
+            for (; i >= loop; i--) {
+                res[i][j] = count++;
+            }
+            start++;
+        }
+        if (n % 2 == 1) {
+            res[start][start] = count;
+        }
+        return res;
+    }
 
+    /**
+     * @Description: 203. 移除链表元素
+     * @author pwz
+     * @date 2022/10/18 10:39
+     * @param head
+     * @param val
+     * @return com.utils.ListNode
+     */
+    public ListNode removeElements(ListNode head, int val) {
+        /**
+         * 设置虚拟头节点处理头结点的删除情况
+         */
+        if (head == null) return null;
+        ListNode dummy = new ListNode(-1, head);
+        ListNode pre = dummy, cur = head;
+        while (cur != null) {
+            if (cur.val == val) {
+                pre.next = cur.next;
+            } else {
+                pre = cur;
+            }
+            cur = cur.next;
+        }
+        return dummy.next;
+    }
 
-
+    /**
+     * @Description: 242. 有效的字母异位词
+     * @author pwz
+     * @date 2022/10/18 10:42
+     * @param s
+     * @param t
+     * @return boolean
+     */
+    public boolean isAnagram(String s, String t) {
+        if (s.length() != t.length()) return false;
+        int[] arr = new int[26];
+        for (char ch : s.toCharArray()) {
+            arr[ch - 'a']++;
+        }
+        for (char ch : t.toCharArray()) {
+            arr[ch - 'a']--;
+        }
+        for (int i : arr) {
+            if (i != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
 
 
     // 473

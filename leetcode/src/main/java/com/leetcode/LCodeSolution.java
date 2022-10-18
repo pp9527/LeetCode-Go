@@ -1383,25 +1383,6 @@ public class LCodeSolution {
         return ans.size();
     }
 
-    // 203
-    public ListNode removeElements(ListNode head, int val) {
-        /**
-         * 设置虚拟头节点处理头结点的删除情况
-         */
-        if (head == null) return null;
-        ListNode dummy = new ListNode(-1, head);
-        ListNode pre = dummy, cur = head;
-        while (cur != null) {
-            if (cur.val == val) {
-                pre.next = cur.next;
-            } else {
-                pre = cur;
-            }
-            cur = cur.next;
-        }
-        return dummy.next;
-    }
-
     // 19
     public ListNode removeNthFromEnd(ListNode head, int n) {
         ListNode dummy = new ListNode(-1,head);
@@ -1416,24 +1397,6 @@ public class LCodeSolution {
         }
         low.next = low.next.next;
         return dummy.next;
-    }
-
-    // 242
-    public boolean isAnagram(String s, String t) {
-        if (s.length() != t.length()) return false;
-        int[] ints = new int[26];
-        for (char ch : s.toCharArray()) {
-            ints[ch - 'a']++;
-        }
-        for (char ch : t.toCharArray()) {
-            ints[ch - 'a']--;
-        }
-        for (int i : ints) {
-            if (i != 0) {
-                return false;
-            }
-        }
-        return true;
     }
 
     // 349
@@ -1757,42 +1720,6 @@ public class LCodeSolution {
             }
         }
         return ans;
-    }
-
-    // 977
-    public int[] sortedSquares(int[] nums) {
-        int left = 0, right = nums.length - 1;
-        int[] ans = new int[right + 1];
-        for (int i = right;i >= 0;i--) {
-            int res1 = nums[left] * nums[left], res2 = nums[right] * nums[right];
-            if (res1 > res2) {
-                ans[i] = res1;
-                left++;
-            }
-            else {
-                ans[i] = res2;
-                right--;
-            }
-        }
-        return ans;
-    }
-
-    // 209
-    public int minSubArrayLen(int target, int[] nums) {
-        /**
-         * 滑动窗口 最小连续子数组
-         */
-        int ans = Integer.MAX_VALUE;
-        int sum = 0;
-        int left = 0;
-        for (int right = 0;right < nums.length;right++) {
-            sum += nums[right];
-            while (sum >= target) {
-                ans = Math.min(ans, right - left + 1);
-                sum -= nums[left++];
-            }
-        }
-        return ans == Integer.MAX_VALUE ? 0 : ans;
     }
 
     // 450
