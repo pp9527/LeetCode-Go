@@ -139,4 +139,75 @@ public class Hot100 {
         }
         return res;
     }
+
+    /**
+     * @Description: 31. 下一个排列
+     * @author pwz
+     * @date 2022/10/19 10:20
+     * @param nums
+     */
+    public void nextPermutation(int[] nums) {
+        int start = nums.length - 2;
+        while (start >= 0 && nums[start] >= nums[start + 1]) {
+            start--;
+        }
+        if (start >= 0) {
+            int end = nums.length - 1;
+            while (end >= 0 && nums[end] <= nums[start]) {
+                end--;
+            }
+            swap(nums, start, end);
+        }
+        reverse(nums, start + 1);
+    }
+
+    private void swap(int[] nums, int a, int b) {
+        int temp = nums[a];
+        nums[a] = nums[b];
+        nums[b] = temp;
+    }
+
+    private void reverse(int[] nums, int start) {
+        int j = nums.length - 1;
+        while (start < j) {
+            swap(nums, start, j);
+            start++;
+            j--;
+        }
+    }
+
+    /**
+     * @Description: 33. 搜索旋转排序数组
+     * @author pwz
+     * @date 2022/10/20 10:19
+     * @param nums
+     * @param target
+     * @return int
+     */
+    public int search(int[] nums, int target) { // 部分有序  二分查找
+        int i = 0, j = nums.length - 1;
+        while (i <= j) {
+            int mid = (i + j) / 2;
+            if (nums[mid] == target) {
+                return mid;
+            }
+            if (nums[mid] >= nums[i]) {
+                if (target < nums[mid] && target >= nums[i]) {
+                    j = mid - 1;
+                } else {
+                    i = mid + 1;
+                }
+            } else {
+                if (target > nums[mid] && target <= nums[j]) {
+                    i = mid + 1;
+                } else {
+                    j = mid - 1;
+                }
+            }
+        }
+        return -1;
+    }
+
+
+
 }

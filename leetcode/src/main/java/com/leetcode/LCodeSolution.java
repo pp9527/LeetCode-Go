@@ -918,19 +918,6 @@ public class LCodeSolution {
         return stack.size() == 1;
     }
 
-    // 206
-    public ListNode reverseList(ListNode head) {
-        ListNode pre = null;
-        ListNode cur = head;
-        while (cur != null) {
-            ListNode next = cur.next;
-            cur.next = pre;
-            pre = cur;
-            cur = next;
-        }
-        return pre;
-    }
-
     // 208
     class Trie {
         /**

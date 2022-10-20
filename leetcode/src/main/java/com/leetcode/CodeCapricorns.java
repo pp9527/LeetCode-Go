@@ -159,6 +159,88 @@ public class CodeCapricorns {
     }
 
     /**
+     * @Description: 707. 设计链表
+     * @author pwz
+     * @date 2022/10/20 10:31
+     * @return null
+     */
+    class MyLinkedList {
+        int size;
+        ListNode head;
+
+        public MyLinkedList() {
+            size = 0;
+            head = new ListNode(0);
+        }
+
+        public int get(int index) {
+            if (index < 0 || index >= size)
+                return -1;
+            ListNode listNode = head;
+            for (int i = 0; i <= index; i++) {
+                listNode = listNode.next;
+            }
+            return listNode.val;
+        }
+
+        public void addAtHead(int val) {
+            addAtIndex(0, val);
+        }
+
+        public void addAtTail(int val) {
+            addAtIndex(size, val);
+        }
+
+        public void addAtIndex(int index, int val) {
+            if (index < 0) index = 0;
+            if (index > size) return;
+            size++;
+            ListNode pre = head;
+            for (int i = 0; i < index; i++) {
+                pre = pre.next;
+            }
+            ListNode add = new ListNode(val);
+            add.next = pre.next;
+            pre.next = add;
+        }
+
+        public void deleteAtIndex(int index) {
+            if (index < 0 || index >= size) return;
+            ListNode pre = head;
+            size--;
+            for (int i = 0; i < index; i++) {
+                pre = pre.next;
+            }
+            pre.next = pre.next.next;
+        }
+    }
+
+    /**
+     * @Description: 206. 反转链表
+     * @author pwz
+     * @date 2022/10/20 10:37
+     * @param head
+     * @return com.utils.ListNode
+     */
+    public ListNode reverseList(ListNode head) {
+        ListNode pre = null;
+        ListNode cur = head;
+        while (cur != null) {
+            ListNode temp = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = temp;
+        }
+        return pre;
+    }
+
+
+
+
+
+
+
+    /**
      * @Description: 242. 有效的字母异位词
      * @author pwz
      * @date 2022/10/18 10:42
@@ -182,6 +264,35 @@ public class CodeCapricorns {
         }
         return true;
     }
+
+    /**
+     * @Description: 349. 两个数组的交集
+     * @author pwz
+     * @date 2022/10/19 10:29
+     * @param nums1
+     * @param nums2
+     * @return int[]
+     */
+    public int[] intersection(int[] nums1, int[] nums2) {
+        HashSet<Integer> set = new HashSet<>();
+        for (int i : nums1) {
+            set.add(i);
+        }
+        HashSet<Integer> ans = new HashSet<>();
+        for (int i : nums2) {
+            if (set.contains(i)) {
+                ans.add(i);
+            }
+        }
+        return ans.stream().mapToInt(x -> x).toArray();
+    }
+
+
+
+
+
+
+
 
 
     // 473
