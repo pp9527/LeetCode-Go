@@ -11,8 +11,6 @@ import java.util.HashSet;
 public class Hot100 {
 
     /**
-     * @param s
-     * @return int
      * @Description: 3. 无重复字符的最长子串
      * @author pwz
      * @date 2022/10/10 10:36
@@ -49,8 +47,6 @@ public class Hot100 {
     }
 
     /**
-     * @param s
-     * @return java.lang.String
      * @Description: 5. 最长回文子串
      * @author pwz
      * @date 2022/10/11 10:25
@@ -123,8 +119,6 @@ public class Hot100 {
     }
 
     /**
-     * @param height
-     * @return int
      * @Description: 11. 盛最多水的容器
      * @author pwz
      * @date 2022/10/18 11:05
@@ -144,7 +138,6 @@ public class Hot100 {
      * @Description: 31. 下一个排列
      * @author pwz
      * @date 2022/10/19 10:20
-     * @param nums
      */
     public void nextPermutation(int[] nums) {
         int start = nums.length - 2;
@@ -180,9 +173,6 @@ public class Hot100 {
      * @Description: 33. 搜索旋转排序数组
      * @author pwz
      * @date 2022/10/20 10:19
-     * @param nums
-     * @param target
-     * @return int
      */
     public int search(int[] nums, int target) { // 部分有序  二分查找
         int i = 0, j = nums.length - 1;
@@ -208,6 +198,26 @@ public class Hot100 {
         return -1;
     }
 
-
+    /**
+     * @Description: 64. 最小路径和
+     * @author pwz
+     * @date 2022/10/21 10:05
+     */
+    public int minPathSum(int[][] grid) {
+        int row = grid.length;
+        int col = grid[0].length;
+        for (int i = 1; i < row; i++) {
+            grid[i][0] = grid[i - 1][0] + grid[i][0];
+        }
+        for (int j = 1; j < col; j++) {
+            grid[0][j] = grid[0][j - 1] + grid[0][j];
+        }
+        for (int i = 1; i < row; i++) {
+            for (int j = 1; j < col; j++) {
+                grid[i][j] = Math.min(grid[i - 1][j], grid[i][j - 1]) + grid[i][j];
+            }
+        }
+        return grid[row - 1][col - 1];
+    }
 
 }

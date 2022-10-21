@@ -216,11 +216,9 @@ public class CodeCapricorns {
     }
 
     /**
-     * @Description: 206. 反转链表
+     * @Description: 206. 翻转链表
      * @author pwz
      * @date 2022/10/20 10:37
-     * @param head
-     * @return com.utils.ListNode
      */
     public ListNode reverseList(ListNode head) {
         ListNode pre = null;
@@ -234,6 +232,37 @@ public class CodeCapricorns {
         return pre;
     }
 
+    /**
+     * @Description: 24. 两两交换链表中的节点
+     * @author pwz
+     * @date 2022/10/21 10:10
+     */
+    public ListNode swapPairs(ListNode head) {
+        ListNode dummyNode = new ListNode(0);
+        dummyNode.next = head;
+        ListNode temp = dummyNode;
+        while (temp.next != null && temp.next.next != null) {
+            ListNode node1 = temp.next;
+            ListNode node2 = temp.next.next;
+            temp.next = node2;
+            node1.next = node2.next;
+            node2.next = node1;
+            temp = node1;
+        }
+        return dummyNode.next;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -244,9 +273,6 @@ public class CodeCapricorns {
      * @Description: 242. 有效的字母异位词
      * @author pwz
      * @date 2022/10/18 10:42
-     * @param s
-     * @param t
-     * @return boolean
      */
     public boolean isAnagram(String s, String t) {
         if (s.length() != t.length()) return false;
