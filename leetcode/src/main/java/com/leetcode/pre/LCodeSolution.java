@@ -157,18 +157,6 @@ public class LCodeSolution {
         inorder(res, root.right);
     }
 
-    // 160
-    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-        if (headA == null || headB == null) return null;
-        ListNode A = headA;
-        ListNode B = headB;
-        while (A != B) {
-            A = A == null ? headB : A.next;
-            B = B == null ? headA : B.next;
-        }
-        return A;
-    }
-
     // 121
     public int maxProfit(int[] prices) {
         int max_profit = 0, min_price = Integer.MAX_VALUE;
@@ -228,43 +216,6 @@ public class LCodeSolution {
             head = head.next;
         }
         return false;
-    }
-
-    // 142
-    public ListNode detectCycle(ListNode head) {
-        /**
-         * 环形链表2
-         * 1、哈希表
-         */
-//        HashSet<ListNode> set = new HashSet<>();
-//        if (head == null) return null;
-//        while (head != null) {
-//            if (!set.add(head)) return head;
-//            head = head.next;
-//        }
-//        return null;
-        /**
-         * 2、快慢指针
-         */
-        if (head == null) return null;
-        ListNode fast = head, slow = head;
-        while (fast != null) {
-            slow = slow.next;
-            if (fast.next != null) {
-                fast = fast.next.next;
-            } else {
-                return null;
-            }
-            if (fast == slow) {
-                ListNode ans = head;
-                while (ans != slow) {
-                    ans = ans.next;
-                    slow = slow.next;
-                }
-                return ans;
-            }
-        }
-        return null;
     }
 
     // 234
@@ -645,35 +596,6 @@ public class LCodeSolution {
             pre = pre.next;
         }
         return head;
-    }
-
-    // 1
-    public int[] twoSum(int[] nums, int target) {
-        /**
-         * 两数之和 返回下标
-         * 1、暴力
-         */
-//        int[] ans = new int[2];
-//        for (int i = 0;i < nums.length;i++) {
-//            for (int j = i + 1;j < nums.length;j++) {
-//                if (nums[i] + nums[j] == target){
-//                    ans[0] = i;
-//                    ans[1] = j;
-//                    return ans;
-//                }
-//            }
-//        }
-//        return ans;
-        /**
-         * 2、哈希表
-         */
-        Map<Integer, Integer> hashMap = new HashMap<>();
-        for (int i = 0;i < nums.length;i++) {
-            if (hashMap.containsKey(target - nums[i]))
-                return new int[] {hashMap.get(target - nums[i]), i};
-            hashMap.put(nums[i], i);
-        }
-        return new int[0];
     }
 
     // 15
@@ -1386,25 +1308,6 @@ public class LCodeSolution {
         int[] res = new int[ans.size()];
         for (int i : ans) {
             res[index++] = i;
-        }
-        return res;
-    }
-
-    // 202
-    public boolean isHappy(int n) {
-        HashSet<Integer> hashSet = new HashSet<>();
-        while (n != 1 && !hashSet.contains(n)) {
-            hashSet.add(n);
-            n = getNextNum(n);
-        }
-        return n == 1;
-    }
-    int getNextNum(int n) {
-        int res = 0;
-        while (n > 0) {
-            int tem = n % 10;
-            res += tem * tem;
-            n = n / 10;
         }
         return res;
     }

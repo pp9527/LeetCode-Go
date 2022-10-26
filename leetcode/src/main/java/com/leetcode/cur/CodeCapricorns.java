@@ -133,12 +133,12 @@ public class CodeCapricorns {
     }
 
     /**
-     * @Description: 203. 移除链表元素
-     * @author pwz
-     * @date 2022/10/18 10:39
      * @param head
      * @param val
      * @return com.utils.ListNode
+     * @Description: 203. 移除链表元素
+     * @author pwz
+     * @date 2022/10/18 10:39
      */
     public ListNode removeElements(ListNode head, int val) {
         /**
@@ -159,8 +159,8 @@ public class CodeCapricorns {
     }
 
     /**
-     * @Description: 707. 设计链表
      * @author pwz
+     * @Description: 707. 设计链表
      * @date 2022/10/20 10:31
      * @return null
      */
@@ -273,21 +273,57 @@ public class CodeCapricorns {
         return dummy.next;
     }
 
+    /**
+     * @Description: 160. 链表相交
+     * @author pwz
+     * @date 2022/10/26 12:19
+     */
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        if (headA == null || headB == null) return null;
+        ListNode A = headA;
+        ListNode B = headB;
+        while (A != B) {
+            A = A == null ? headB : A.next;
+            B = B == null ? headA : B.next;
+        }
+        return A;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    /**
+     * @Description: 142. 环形链表 II
+     * @author pwz
+     * @date 2022/10/26 13:06
+     */
+    public ListNode detectCycle(ListNode head) {
+        /**
+         * 环形链表2
+         * 1、哈希表
+         */
+//        HashSet<ListNode> set = new HashSet<>();
+//        if (head == null) return null;
+//        while (head != null) {
+//            if (!set.add(head)) return head;
+//            head = head.next;
+//        }
+//        return null;
+        /**
+         * 2、快慢指针
+         */
+        ListNode fast = head, low = head;
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            low = low.next;
+            if (fast == low) {
+                fast = head;
+                while (fast != low) {
+                    fast = fast.next;
+                    low = low.next;
+                }
+                return fast;
+            }
+        }
+        return null;
+    }
 
     /**
      * @Description: 242. 有效的字母异位词
@@ -312,12 +348,12 @@ public class CodeCapricorns {
     }
 
     /**
-     * @Description: 349. 两个数组的交集
-     * @author pwz
-     * @date 2022/10/19 10:29
      * @param nums1
      * @param nums2
      * @return int[]
+     * @Description: 349. 两个数组的交集
+     * @author pwz
+     * @date 2022/10/19 10:29
      */
     public int[] intersection(int[] nums1, int[] nums2) {
         HashSet<Integer> set = new HashSet<>();
@@ -333,12 +369,62 @@ public class CodeCapricorns {
         return ans.stream().mapToInt(x -> x).toArray();
     }
 
+    /**
+     * @Description: 202. 快乐数
+     * @author pwz
+     * @date 2022/10/26 13:16
+     */
+    public boolean isHappy(int n) {
+        HashSet<Integer> hashSet = new HashSet<>();
+        while (n != 1 && !hashSet.contains(n)) {
+            hashSet.add(n);
+            n = getNextNum(n);
+        }
+        return n == 1;
+    }
 
+    int getNextNum(int n) {
+        int res = 0;
+        while (n > 0) {
+            int tem = n % 10;
+            res += tem * tem;
+            n = n / 10;
+        }
+        return res;
+    }
 
-
-
-
-
+    /**
+     * @Description: 1. 两数之和
+     * @author pwz
+     * @date 2022/10/26 13:25
+     */
+    public int[] twoSum(int[] nums, int target) {
+        /**
+         * 两数之和 返回下标
+         * 1、暴力
+         */
+//        int[] ans = new int[2];
+//        for (int i = 0;i < nums.length;i++) {
+//            for (int j = i + 1;j < nums.length;j++) {
+//                if (nums[i] + nums[j] == target){
+//                    ans[0] = i;
+//                    ans[1] = j;
+//                    return ans;
+//                }
+//            }
+//        }
+//        return ans;
+        /**
+         * 2、哈希表
+         */
+        Map<Integer, Integer> hashMap = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (hashMap.containsKey(target - nums[i]))
+                return new int[]{hashMap.get(target - nums[i]), i};
+            hashMap.put(nums[i], i);
+        }
+        return new int[0];
+    }
 
 
     // 473
