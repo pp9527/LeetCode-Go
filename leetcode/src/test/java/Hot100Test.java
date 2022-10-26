@@ -1,5 +1,4 @@
-import com.leetcode.CodeCapricorns;
-import com.leetcode.Hot100;
+import com.leetcode.cur.Hot100;
 import org.junit.Test;
 
 /**
@@ -21,8 +20,4 @@ public class Hot100Test {
         hot100.lengthOfLongestSubstring_1("abcddd");
     }
 
-    @Test
-    public void testMaxArea() {
-        hot100.maxArea(new int[] {1,8,6,2,5,4,8,3,7});
-    }
 }

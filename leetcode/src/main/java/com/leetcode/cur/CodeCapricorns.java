@@ -1,4 +1,4 @@
-package com.leetcode;
+package com.leetcode.cur;
 
 import com.utils.ListNode;
 import com.utils.TreeNode;
@@ -252,6 +252,26 @@ public class CodeCapricorns {
         return dummyNode.next;
     }
 
+    /**
+     * @Description: 19. 删除链表的倒数第 N 个结点
+     * @author pwz
+     * @date 2022/10/26 11:45
+     */
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+        ListNode cur = dummy, pre = dummy;
+        while (n >= 0) {
+            pre = pre.next;
+            n--;
+        }
+        while (pre != null) {
+            pre = pre.next;
+            cur = cur.next;
+        }
+        cur.next = cur.next.next;
+        return dummy.next;
+    }
 
 
 

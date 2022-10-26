@@ -1,4 +1,4 @@
-package com.leetcode;
+package com.leetcode.pre;
 
 import com.utils.ListNode;
 import com.utils.Node;
@@ -1368,22 +1368,6 @@ public class LCodeSolution {
             ans.add(new String(stringBuilder));
         }
         return ans.size();
-    }
-
-    // 19
-    public ListNode removeNthFromEnd(ListNode head, int n) {
-        ListNode dummy = new ListNode(-1,head);
-        ListNode low = dummy, high = dummy;
-        while (n >= 0) {
-            high = high.next;
-            n--;
-        }
-        while (high != null) {
-            high = high.next;
-            low = low.next;
-        }
-        low.next = low.next.next;
-        return dummy.next;
     }
 
     // 349

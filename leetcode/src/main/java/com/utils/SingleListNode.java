@@ -7,7 +7,7 @@ package com.utils;
  * @FileName: SingleListNode
  */
 class SingleListNode {
-    ListNode head = new ListNode(0);
+    ListNode head;
 
     public void add(ListNode listNode) {
         if (head == null) {
@@ -22,11 +22,11 @@ class SingleListNode {
     }
 
     public void list() {
-        if (head.next == null) {
+        if (head == null) {
             System.out.println("空表...");
             return;
         }
-        ListNode temp = head.next;
+        ListNode temp = head;
         while (temp != null) {
             System.out.println(temp.val);
             temp = temp.next;
@@ -44,5 +44,4 @@ class SingleListNode {
         head.add(node3);
         head.list();
     }
-
 }

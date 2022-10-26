@@ -1,4 +1,4 @@
-import com.leetcode.CodeCapricornsExtra;
+import com.leetcode.cur.CodeCapricornsExtra;
 import org.junit.Test;
 
 /**

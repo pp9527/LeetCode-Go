@@ -1,6 +1,7 @@
-package com.leetcode;
+package com.leetcode.cur;
 
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author: pwz
@@ -220,4 +221,59 @@ public class Hot100 {
         return grid[row - 1][col - 1];
     }
 
+    /**
+     * @Description: 75. 颜色分类
+     * @author pwz
+     * @date 2022/10/25 20:54
+     */
+    public void sortColors(int[] nums) {
+        int p0 = 0, p1 = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] == 1) {
+                int temp = nums[i];
+                nums[i] = nums[p1];
+                nums[p1] = temp;
+                p1++;
+            } else if (nums[i] == 0) {
+                int temp = nums[i];
+                nums[i] = nums[p0];
+                nums[p0] = temp;
+                if (p1 > p0) {
+                    int tem = nums[i];
+                    nums[i] = nums[p1];
+                    nums[p1] = tem;
+                }
+                p0++;
+                p1++;
+            }
+        }
+    }
+
+    /**
+     * @Description: 128. 最长连续序列
+     * 把数放入哈希表set中，去重，遍历set中的每一个数，若当前遍历的数减一已经存在set中，
+     * 则此数开头的序列必不可能最长，直接跳过进行下一次遍历，若此数减一不存在set中，则进行加一，
+     * 再次判断是否在set中，直至跳出循环，更新长度
+     * @author pwz
+     * @date 2022/10/26 11:56
+     */
+    public int longestConsecutive(int[] nums) {
+        Set<Integer> num = new HashSet<>();
+        int curLen = 0, longest = 0;
+        for (int i : nums) {
+            num.add(i);
+        }
+        for (int n : num) {
+            if (!num.contains(n - 1)) {
+                curLen = 1;
+                int curLenNum = n;
+                while (num.contains(curLenNum + 1)) {
+                    curLenNum++;
+                    curLen++;
+                }
+            }
+            longest = Math.max(longest, curLen);
+        }
+        return longest;
+    }
 }
