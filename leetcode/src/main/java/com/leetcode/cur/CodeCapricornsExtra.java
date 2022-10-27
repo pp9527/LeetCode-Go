@@ -3,7 +3,7 @@ package com.leetcode.cur;
 /**
  * @author: pwz
  * @create: 2022/10/12 10:27
- * @Description:
+ * @Description: 代码随想录额外题目
  * @FileName: CodeCapricornsExtra
  */
 public class CodeCapricornsExtra {

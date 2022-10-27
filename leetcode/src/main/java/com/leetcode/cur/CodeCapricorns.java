@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 /**
  * @author: pwz
  * @create: 2022/6/1 17:06
- * @Description:
+ * @Description: 代码随想录
  * @FileName: Solution
  */
 public class CodeCapricorns {
@@ -426,6 +426,94 @@ public class CodeCapricorns {
         return new int[0];
     }
 
+    /**
+     * @Description: 454. 四数相加 II
+     * @author pwz
+     * @date 2022/10/27 10:49
+     */
+    public int fourSumCount(int[] nums1, int[] nums2, int[] nums3, int[] nums4) {
+        Map<Integer, Integer> map = new HashMap<>();
+        int res = 0;
+        for (int i : nums1) {
+            for (int j : nums2) {
+                map.put(i + j, map.getOrDefault(i + j, 0) + 1);
+            }
+        }
+        for (int i : nums3) {
+            for (int j : nums4) {
+                if (map.containsKey(-i - j)) {
+                    res++;
+                }
+            }
+        }
+        return res;
+    }
+
+    /**
+     * @Description: 383. 赎金信
+     * @author pwz
+     * @date 2022/10/27 13:11
+     */
+    public boolean canConstruct(String ransomNote, String magazine) {
+        int[] arr = new int [26];
+        for (char i : magazine.toCharArray()) {
+            arr[i - 'a']++;
+        }
+        for (char i : ransomNote.toCharArray()) {
+            if (--arr[i - 'a'] < 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // 473
     public boolean makeSquare(int[] matchsticks) {
@@ -450,29 +538,6 @@ public class CodeCapricorns {
             edges[i] -= matchsticks[index];
         }
         return false;
-    }
-
-    // 454
-    public int fourSumCount(int[] nums1, int[] nums2, int[] nums3, int[] nums4) {
-        HashMap<Integer, Integer> map = new HashMap<>();
-        int ans = 0;
-        for (int i : nums1) {
-            for (int j : nums2) {
-                if (map.containsKey(i + j)) {
-                    map.put((i + j), map.get(i + j) + 1);
-                } else {
-                    map.put((i + j), 1);
-                }
-            }
-        }
-        for (int k : nums3) {
-            for (int l : nums4) {
-                if (map.containsKey(-k - l)) {
-                    ans += map.get(-k - l);
-                }
-            }
-        }
-        return ans;
     }
 
     // 18

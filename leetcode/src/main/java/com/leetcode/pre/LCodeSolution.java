@@ -1325,38 +1325,6 @@ public class LCodeSolution {
         return new int[] {count, sum};
     }
 
-    // 383
-    public boolean canConstruct(String ransomNote, String magazine) {
-        /**
-         * 赎金信
-         */
-//        ArrayList<Character> record = new ArrayList<>();
-//        for (char ch : magazine.toCharArray()) {
-//            record.add(ch);
-//        }
-//        for (char ch : ransomNote.toCharArray()) {
-//            if (record.contains(ch)) {
-//                record.remove(record.indexOf(ch));
-//            } else {
-//                return false;
-//            }
-//        }
-//        return true;
-        /**
-         * 2、哈希解法、数组做哈希表
-         */
-        int[] record = new int[26];
-        for (char ch : magazine.toCharArray()) {
-            record[ch - 'a']++;
-        }
-        for (char ch : ransomNote.toCharArray()) {
-            if (--record[ch - 'a'] < 0) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     // 1047
     public String removeDuplicates(String s) {
         ArrayDeque<Character> deque = new ArrayDeque<>();
