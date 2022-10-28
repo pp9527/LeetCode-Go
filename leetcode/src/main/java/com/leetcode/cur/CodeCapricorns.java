@@ -467,9 +467,67 @@ public class CodeCapricorns {
         return true;
     }
 
+    /**
+     * @Description: 18. 四数之和
+     * @author pwz
+     * @date 2022/10/28 10:22
+     */
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+        Arrays.sort(nums);
+        List<List<Integer>> res = new ArrayList<>();
+        for (int i = 0; i < nums.length - 3; i++) {
+            // 当最小值大于target结束
+            if (nums[i] > target && target >= 0) break;
+            // 去重
+            if (i > 0 && nums[i - 1] == nums[i]) continue;
+            // 当组合最小值大于target结束
+            if ((long) nums[i] + nums[i + 1] + nums[i + 2] + nums[i + 3] > target) break;
+            // 当该层循环组合最大值小于target  i++进入下层循环
+            if ((long) nums[i] + nums[nums.length - 1] + nums[nums.length - 2] + nums[nums.length - 3] < target)
+                continue;
+            for (int j = i + 1; j < nums.length - 2; j++) {
+                // 去重
+                if (j > i + 1 && nums[j - 1] == nums[j]) continue;
+                // 当该层组合最小值大于target结束
+                if ((long) nums[i] + nums[j] + nums[j + 1] + nums[j + 2] > target) break;
+                // 当该层循环组合最大值小于target  j++进入下层循环
+                if ((long) nums[i] + nums[nums.length - 1] + nums[nums.length - 2] + nums[j] < target) continue;
+                int left = j + 1, right = nums.length - 1;
+                while (left < right) {
+                    long sum =  (long) nums[i] + nums[j] + nums[left] + nums[right];
+                    if (sum > target) {
+                        right--;
+                    } else if (sum < target) {
+                        left++;
+                    } else {
+                        res.add(Arrays.asList(nums[i], nums[j], nums[left], nums[right]));
+                        while (left < right && nums[left] == nums[left + 1]) left++;
+                        while (left < right && nums[right] == nums[right - 1]) right--;
+                        left++;
+                        right--;
+                    }
+                }
+            }
+        }
+        return res;
+    }
 
-
-
+    /**
+     * @Description: 344. 反转字符串
+     * @author pwz
+     * @date 2022/10/28 11:01
+     */
+    public void reverseString(char[] s) {
+        int l = 0;
+        int r = s.length - 1;
+        while (l < r) {
+            s[l] ^= s[r];  //构造 a ^ b 的结果，并放在 a 中
+            s[r] ^= s[l];  //将 a ^ b 这一结果再 ^ b ，存入b中，此时 b = a, a = a ^ b
+            s[l] ^= s[r];  //a ^ b 的结果再 ^ a ，存入 a 中，此时 b = a, a = b 完成交换
+            l++;
+            r--;
+        }
+    }
 
 
 
@@ -538,58 +596,6 @@ public class CodeCapricorns {
             edges[i] -= matchsticks[index];
         }
         return false;
-    }
-
-    // 18
-    public List<List<Integer>> fourSum(int[] nums, int target) {
-        ArrayList<List<Integer>> lists = new ArrayList<>();
-        if (nums == null || nums.length < 4) {
-            return lists;
-        }
-        Arrays.sort(nums);
-        int length = nums.length;
-        for (int i = 0; i < length - 3; i++) {
-            if (i > 0 && nums[i - 1] == nums[i]) {
-                continue;
-            }
-            if (nums[i] + nums[i + 1] + nums[i + 2] + nums[i + 3] > target) {
-                break;
-            }
-            if (nums[i] + nums[length - 1] + nums[length - 2] + nums[length - 3] < target) {
-                continue;
-            }
-            for (int j = i + 1; j < length - 2; j++) {
-                if (j > i + 1 && nums[j - 1] == nums[j]) {
-                    continue;
-                }
-                if (nums[i] + nums[j] + nums[j + 1] + nums[j + 2] > target) {
-                    break;
-                }
-                if (nums[i] + nums[j] + nums[length - 1] + nums[length - 2] < target) {
-                    continue;
-                }
-                int left = j + 1, right = length - 1;
-                while (left < right) {
-                    int sum = nums[i] + nums[j] + nums[left] + nums[right];
-                    if (sum == target) {
-                        lists.add(Arrays.asList(nums[i], nums[j], nums[left], nums[right]));
-                        while (left < right && nums[left] == nums[left + 1]) {
-                            left++;
-                        }
-                        left++;
-                        while (left < right && nums[right] == nums[right - 1]) {
-                            right--;
-                        }
-                        right--;
-                    } else if (sum < target) {
-                        left++;
-                    } else {
-                        right--;
-                    }
-                }
-            }
-        }
-        return lists;
     }
 
     // 459

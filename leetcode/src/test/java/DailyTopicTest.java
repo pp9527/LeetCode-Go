@@ -13,6 +13,6 @@ public class DailyTopicTest {
 
     @Test
     public void testCanConstruct() {
-        dailyTopic.canConstruct("aaa", "abaca");
+//        dailyTopic.canConstruct("aaa", "abaca");
     }
 }

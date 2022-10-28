@@ -18,4 +18,9 @@ public class CodeCapricornsTest {
     public void testFourSumCount() {
         codeCapricorns.fourSumCount(new int[]{-1, -1}, new int[]{-1, 1}, new int[]{-1, 1}, new int[]{1, -1});
     }
+
+    @Test
+    public void testFourSum1() {
+        codeCapricorns.fourSum(new int[]{2, 2, 2, 2, 2}, 8);
+    }
 }
