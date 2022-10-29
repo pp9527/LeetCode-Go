@@ -651,17 +651,6 @@ public class LCodeSolution {
         node.next = node.next.next;
     }
 
-    // 344
-    public void reverseString(char[] s) {
-        int n = s.length;
-        char tmp;
-        for (int i = 0;i < n / 2;i++) {
-            tmp = s[i];
-            s[i] = s[n - 1 - i];
-            s[n - 1 - i] = tmp;
-        }
-    }
-
     // 557
     public String reverseWords(String s) {
         /**
@@ -1232,25 +1221,6 @@ public class LCodeSolution {
             ans.add(res);
         }
         return ans;
-    }
-
-    // 541
-    public String reverseStr(String s, int k) {
-        int length = s.length();
-        char[] chars = s.toCharArray();
-        for (int i = 0;i < length;i += 2 * k) {
-            reverse(chars, i, Math.min(i + k - 1, length - 1));
-        }
-        return new String(chars);
-    }
-    void reverse(char[] chars, int left, int right) {
-        while (left < right) {
-            char tem = chars[left];
-            chars[left] = chars[right];
-            chars[right] = tem;
-            left++;
-            right--;
-        }
     }
 
     // 780

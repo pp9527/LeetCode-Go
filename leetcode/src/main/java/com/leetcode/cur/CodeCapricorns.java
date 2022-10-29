@@ -529,9 +529,56 @@ public class CodeCapricorns {
         }
     }
 
+    /**
+     * @Description: 541. 反转字符串 II
+     * @author pwz
+     * @date 2022/10/29 9:36
+     */
+    public String reverseStr(String s, int k) {
+        char[] ch = s.toCharArray();
+        for (int i = 0; i < ch.length; i += 2 * k) {
+            int start = i;
+            int end = Math.min(ch.length - 1, start + k - 1);
+            while (start < end) {
+                ch[start] ^= ch[end];
+                ch[end] ^= ch[start];
+                ch[start] ^= ch[end];
+                start++;
+                end--;
+            }
+        }
+        return String.valueOf(ch);
+    }
 
-
-
+    /**
+     * @Description: 剑指 Offer 05. 替换空格
+     * @author pwz
+     * @date 2022/10/29 11:00
+     */
+    public String replaceSpace(String s) {
+        if (s == null || s.length() == 0) return s;
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == ' ') {
+                str.append("  ");
+            }
+        }
+        int left = s.length() - 1;
+        s += str.toString();
+        int right = s.length() - 1;
+        char[] chars = s.toCharArray();
+        while (left < right) {
+            if (chars[left] == ' ') {
+                chars[right--] = '0';
+                chars[right--] = '2';
+                chars[right--] = '%';
+            } else {
+                chars[right--] = chars[left];
+            }
+            left--;
+        }
+        return new String(chars);
+    }
 
 
 

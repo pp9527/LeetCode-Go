@@ -276,4 +276,32 @@ public class Hot100 {
         }
         return longest;
     }
+
+    /**
+     * @Description: 152. 乘积最大子数组
+     * @author pwz
+     * @date 2022/10/29 10:26
+     */
+    public int maxProduct(int[] nums) {
+        int indexMax = 1, indexMin = 1;
+        int res = Integer.MIN_VALUE;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] < 0) {
+                indexMax ^= indexMin;
+                indexMin ^= indexMax;
+                indexMax ^= indexMin;
+            }
+            indexMax = Math.max(nums[i], nums[i] * indexMax);
+            indexMin = Math.min(nums[i], nums[i] * indexMin);
+            res = Math.max(res, indexMax);
+        }
+        return res;
+    }
+
+
+
+
+
+
+
 }
