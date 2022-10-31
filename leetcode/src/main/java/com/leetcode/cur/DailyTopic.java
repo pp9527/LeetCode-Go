@@ -1,6 +1,7 @@
 package com.leetcode.cur;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,9 +45,57 @@ public class DailyTopic {
         return count;
     }
 
+    /**
+     * @Description: 784. 字母大小写全排列
+     * @author pwz
+     * @date 2022/10/30 13:10
+     */
+    public List<String> letterCasePermutation(String s) {
+        List<String> res = new ArrayList<>();
+        dfs(s.toCharArray(), 0, res);
+        return res;
+    }
 
+    private void dfs(char[] arr, int index, List<String> res) {
+        while (index < arr.length && Character.isDigit(arr[index])) {
+            index++;
+        }
+        if (index == arr.length) {
+            res.add(new String(arr));
+            return;
+        }
+//        arr[index] ^= 32;
+        dfs(arr, index + 1, res);
+        arr[index] ^= 32;
+        dfs(arr, index + 1, res);
+    }
 
-
+    /**
+     * @Description: 481. 神奇字符串
+     * @author pwz
+     * @date 2022/10/31 9:50
+     */
+    public int magicalString(int n) {
+        if (n < 4) return 1;
+        int[] arr = new int[n];
+        arr[0] = 1;
+        arr[1] = 2;
+        arr[2] = 2;
+        int i = 2, j = 3, res = 0;
+        while (j < n) {
+            int num = 3 - arr[j - 1];
+            int size = arr[i];
+            while (size > 0 && j < n) {
+                arr[j++] = num;
+                if (num == 1) {
+                    res++;
+                }
+                size--;
+            }
+            i++;
+        }
+        return res;
+    }
 
 
 

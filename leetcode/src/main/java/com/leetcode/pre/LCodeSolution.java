@@ -78,7 +78,7 @@ public class LCodeSolution {
     // 338
     public int[] countBits(int n) {
         int res[] = new int[n + 1];
-        for (int i = 0;i <= n;i++) {
+        for (int i = 0; i <= n; i++) {
             res[i] = Integer.bitCount(i);
         }
         return res;
@@ -92,11 +92,11 @@ public class LCodeSolution {
 
     // 448
     public List<Integer> findDisappearedNumbers(int[] nums) {
-        for (int i = 0;i < nums.length;i++) {
+        for (int i = 0; i < nums.length; i++) {
             nums[Math.abs(nums[i]) - 1] = -Math.abs(nums[Math.abs(nums[i]) - 1]);
         }
         ArrayList<Integer> res = new ArrayList<Integer>();
-        for (int i = 0;i < nums.length;i++) {
+        for (int i = 0; i < nums.length; i++) {
             if (nums[i] > 0) res.add(i + 1);
         }
         return res;
@@ -110,7 +110,7 @@ public class LCodeSolution {
          *摩尔投票法
          */
         int res = nums[0], count = 1;
-        for (int i = 1;i < nums.length;i++) {
+        for (int i = 1; i < nums.length; i++) {
             if (nums[i] != res) {
                 if (--count == 0) {
                     res = nums[i];
@@ -134,12 +134,12 @@ public class LCodeSolution {
     // 283
     public void moveZeroes(int[] nums) {
         int pre = 0;
-        for (int i = 0;i < nums.length;i++)
+        for (int i = 0; i < nums.length; i++)
             if (nums[i] != 0) {
                 nums[pre] = nums[i];
                 pre++;
             }
-        for (int i = pre;i < nums.length;i++) {
+        for (int i = pre; i < nums.length; i++) {
             nums[i] = 0;
         }
     }
@@ -150,6 +150,7 @@ public class LCodeSolution {
         inorder(res, root);
         return res;
     }
+
     void inorder(List<Integer> res, TreeNode root) {
         if (root == null) return;
         inorder(res, root.left);
@@ -160,7 +161,7 @@ public class LCodeSolution {
     // 121
     public int maxProfit(int[] prices) {
         int max_profit = 0, min_price = Integer.MAX_VALUE;
-        for (int i = 0;i < prices.length;i++) {
+        for (int i = 0; i < prices.length; i++) {
             if (prices[i] < min_price) {
                 min_price = prices[i];
             } else if (prices[i] - min_price > max_profit) {
@@ -174,6 +175,7 @@ public class LCodeSolution {
     public boolean isSymmetric(TreeNode root) {
         return check(root, root);
     }
+
     boolean check(TreeNode p, TreeNode q) {
         if (p == null && q == null) return true;
         if (p == null || q == null) return false;
@@ -182,10 +184,12 @@ public class LCodeSolution {
 
     // 543
     int res543 = 0;
+
     public int diameterOfBinaryTree(TreeNode root) {
         deep(root);
         return res543 - 1;
     }
+
     int deep(TreeNode root) {
         if (root == null) return 0;
         int L = deep(root.left);
@@ -197,7 +201,7 @@ public class LCodeSolution {
     // 53
     public int maxSubArray(int[] nums) {
         int index = 0, max = nums[0];
-        for (int i = 0;i < nums.length;i++) {
+        for (int i = 0; i < nums.length; i++) {
             index = Math.max(index + nums[i], nums[i]);
             max = Math.max(index, max);
         }
@@ -263,6 +267,7 @@ public class LCodeSolution {
         backtrack(n, output, res, 0);
         return res;
     }
+
     public void backtrack(int n, List<Integer> output, List<List<Integer>> res, int first) {
         if (first == n) {
             res.add(new ArrayList<Integer>(output));
@@ -276,10 +281,12 @@ public class LCodeSolution {
 
     // 22
     ArrayList<String> res = new ArrayList<>();
+
     public List<String> generateParenthesis(int n) {
         generate("", n, n);
         return res;
     }
+
     void generate(String string, int left, int right) {
         if (left == 0 && right == 0) {
             res.add(string);
@@ -314,15 +321,15 @@ public class LCodeSolution {
          * 2、循环
          */
         int tem;
-        for (int i = 0;i < matrix.length / 2;i++) {
-            for (int j = 0;j < matrix[0].length;j++) {
+        for (int i = 0; i < matrix.length / 2; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
                 tem = matrix[i][j];
                 matrix[i][j] = matrix[matrix.length - i - 1][j];
                 matrix[matrix.length - i - 1][j] = tem;
             }
         }
-        for (int i = 1;i < matrix.length;i++) {
-            for (int j = 0;j < i;j++) {
+        for (int i = 1; i < matrix.length; i++) {
+            for (int j = 0; j < i; j++) {
                 tem = matrix[i][j];
                 matrix[i][j] = matrix[j][i];
                 matrix[j][i] = tem;
@@ -354,11 +361,11 @@ public class LCodeSolution {
         int length = nums.length;
         int[] ans = new int[length];
         ans[0] = 1;
-        for (int i = 1;i < length;i++) {
+        for (int i = 1; i < length; i++) {
             ans[i] = nums[i - 1] * ans[i - 1];
         }
         int R = 1;
-        for (int i = length - 1;i >= 0;i--) {
+        for (int i = length - 1; i >= 0; i--) {
             ans[i] = ans[i] * R;
             R = R * nums[i];
         }
@@ -375,6 +382,7 @@ public class LCodeSolution {
         dfs(candidates, target, ans, combine, 0);
         return ans;
     }
+
     void dfs(int[] candidates, int target, List<List<Integer>> ans, List<Integer> combine, int index) {
         if (index == candidates.length) return;
         if (target == 0) {
@@ -409,6 +417,7 @@ public class LCodeSolution {
         letterCombination(ans, map, digits, 0, new StringBuilder());
         return ans;
     }
+
     void letterCombination(List<String> ans, Map<Character, String> map,
                            String digits, int index, StringBuilder combine) {
         if (index == digits.length()) ans.add(combine.toString());
@@ -416,7 +425,7 @@ public class LCodeSolution {
             char ch = digits.charAt(index);
             String string = map.get(ch);
             int length = string.length();
-            for (int i = 0;i < length;i++) {
+            for (int i = 0; i < length; i++) {
                 combine.append(string.charAt(i));
                 letterCombination(ans, map, digits, index + 1, combine);
                 combine.deleteCharAt(index);
@@ -426,15 +435,17 @@ public class LCodeSolution {
 
     // 494
     int ans = 0;
+
     public int findTargetSumWays(int[] nums, int target) {
         /**
          * 回溯时间待优化， 下次试试动态规划
          */
-        findTarget(nums, target,0, 0);
+        findTarget(nums, target, 0, 0);
         return ans;
     }
+
     void findTarget(int[] nums, int target, int index, int sum) {
-        if (index == nums.length){
+        if (index == nums.length) {
             if (sum == target)
                 ans++;
         } else {
@@ -450,14 +461,15 @@ public class LCodeSolution {
          */
         int h = board.length, l = board[0].length;
         boolean[][] visited = new boolean[h][l];
-        for (int i = 0;i < h;i++) {
-            for (int j = 0;j < l;j++) {
+        for (int i = 0; i < h; i++) {
+            for (int j = 0; j < l; j++) {
                 boolean flag = existWord(board, visited, i, j, word, 0);
                 if (flag) return true;
             }
         }
         return false;
     }
+
     boolean existWord(char[][] board, boolean[][] visited, int i, int j, String word, int k) {
         if (board[i][j] != word.charAt(k)) return false;
         else if (k == word.length() - 1) return true;
@@ -485,12 +497,13 @@ public class LCodeSolution {
         List<TreeNode> list = new ArrayList<>();
         dfs(list, root);
         int length = list.size();
-        for (int i = 1;i < length;i++) {
+        for (int i = 1; i < length; i++) {
             TreeNode pre = list.get(i - 1), cur = list.get(i);
             pre.left = null;
             pre.right = cur;
         }
     }
+
     void dfs(List<TreeNode> arrayList, TreeNode treeNode) {
         if (treeNode == null) return;
         arrayList.add(treeNode);
@@ -506,7 +519,7 @@ public class LCodeSolution {
         int length = temperatures.length;
         int[] ans = new int[length];
         Deque<Integer> stack = new LinkedList<>();
-        for (int i = 0;i < length;i++) {
+        for (int i = 0; i < length; i++) {
             int temperature = temperatures[i];
             while (!stack.isEmpty() && temperature > temperatures[stack.peek()]) {
                 int pre = stack.pop();
@@ -519,17 +532,19 @@ public class LCodeSolution {
 
     // 105
     Map<Integer, Integer> indexMap;
+
     public TreeNode buildTree(int[] pre_order, int[] in_order) {
         /**
          * 递归  继续练
          */
         indexMap = new HashMap<Integer, Integer>();
         int n = pre_order.length;
-        for (int i = 0;i < n;i++) {
+        for (int i = 0; i < n; i++) {
             indexMap.put(in_order[i], i);
         }
         return myBuildTree(pre_order, in_order, 0, n - 1, 0, n - 1);
     }
+
     TreeNode myBuildTree(int[] pre, int[] in, int pre_left, int pre_right, int in_left, int in_right) {
         if (pre_left > pre_right) return null;
         int pre_order_root = pre_left;
@@ -545,6 +560,7 @@ public class LCodeSolution {
 
     // 538
     int sum = 0;
+
     public TreeNode convertBST(TreeNode root) {
         /**
          * 反序中序遍历  右根左
@@ -585,13 +601,13 @@ public class LCodeSolution {
         }
         int[] arr = new int[n];
         pre = head;
-        for (int i = 0;i < n;i++) {
+        for (int i = 0; i < n; i++) {
             arr[i] = pre.val;
             pre = pre.next;
         }
         Arrays.sort(arr);
         pre = head;
-        for (int i = 0;i < n;i++) {
+        for (int i = 0; i < n; i++) {
             pre.val = arr[i];
             pre = pre.next;
         }
@@ -606,15 +622,15 @@ public class LCodeSolution {
         Arrays.sort(nums);
         List<List<Integer>> ans = new ArrayList<>();
         int n = nums.length;
-        for (int first = 0;first < n - 2;first++) {
+        for (int first = 0; first < n - 2; first++) {
             if (first > 0 && nums[first] == nums[first - 1]) continue;
             int target = -nums[first];
             int third = n - 1;
-            for (int second = first + 1;second < n - 1;second++) {
+            for (int second = first + 1; second < n - 1; second++) {
                 if (second > first + 1 && nums[second] == nums[second - 1]) continue;
                 while (second < third && nums[second] + nums[third] > target) --third;
                 if (second == third) break;
-                if (nums[second] + nums[third] == target){
+                if (nums[second] + nums[third] == target) {
                     ArrayList<Integer> list = new ArrayList<>();
                     list.add(nums[first]);
                     list.add(nums[second]);
@@ -634,8 +650,8 @@ public class LCodeSolution {
         int[] G = new int[n + 1];
         G[1] = 1;
         G[0] = 1;
-        for (int i = 2;i <= n;i++) {
-            for (int j = 1;j <= i;j++) {
+        for (int i = 2; i <= n; i++) {
+            for (int j = 1; j <= i; j++) {
                 G[i] += G[j - 1] * G[i - j];
             }
         }
@@ -674,10 +690,10 @@ public class LCodeSolution {
          */
         StringBuilder ans = new StringBuilder();
         int n = s.length(), i = 0;
-        while (i < n){
+        while (i < n) {
             int start = i;
             while (i < n && s.charAt(i) != ' ') i++;
-            for (int index = i - 1;index >= start;index--) {
+            for (int index = i - 1; index >= start; index--) {
                 ans.append(s.charAt(index));
             }
             while (i < n && s.charAt(i) == ' ') {
@@ -746,9 +762,9 @@ public class LCodeSolution {
     // 14
     public String longestCommonPrefix(String[] str) {
         int length = str[0].length(), l = str.length;
-        for (int i = 0;i < length;i++) {
+        for (int i = 0; i < length; i++) {
             char ch = str[0].charAt(i);
-            for (int j = 1;j < l;j++) {
+            for (int j = 1; j < l; j++) {
                 if (i == str[j].length() || str[j].charAt(i) != ch)
                     return str[0].substring(0, i);
             }
@@ -759,15 +775,16 @@ public class LCodeSolution {
     // 762
     public int countPrimeSetBits(int left, int right) {
         int ans = 0;
-        for (int i = left;i <= right;i++) {
+        for (int i = left; i <= right; i++) {
             if (isPrim(Integer.bitCount(i)))
                 ans++;
         }
         return ans;
     }
+
     public boolean isPrim(int x) {
         if (x < 2) return false;
-        for (int i = 2;i <= x / 2;i++) {
+        for (int i = 2; i <= x / 2; i++) {
             if (x % i == 0)
                 return false;
         }
@@ -845,7 +862,7 @@ public class LCodeSolution {
         public void insert(String word) {
             Trie node = this;
             int n = word.length();
-            for (int i = 0;i < n;i++) {
+            for (int i = 0; i < n; i++) {
                 char ch = word.charAt(i);
                 int index = ch - 'a';
                 if (node.children[index] == null)
@@ -867,7 +884,7 @@ public class LCodeSolution {
         public Trie searchPrefix(String prefix) {
             Trie node = this;
             int n = prefix.length();
-            for (int i = 0;i < n;i++) {
+            for (int i = 0; i < n; i++) {
                 char ch = prefix.charAt(i);
                 int index = ch - 'a';
                 if (node.children[index] == null) return null;
@@ -892,6 +909,7 @@ public class LCodeSolution {
 
     // offer 54
     int res54, k;
+
     public int kthLargest(TreeNode root, int k) {
         /**
          * 逆中序遍历 到第 k 个结束
@@ -900,10 +918,12 @@ public class LCodeSolution {
         dfs(root);
         return res54;
     }
+
     void dfs(TreeNode root) {
         if (root == null) return;
         dfs(root.right);
-        if (k == 0) return;;
+        if (k == 0) return;
+        ;
         if (--k == 0) res54 = root.val;
         dfs(root.left);
     }
@@ -938,13 +958,13 @@ public class LCodeSolution {
          */
         List<int[]> ans = new ArrayList<>();
         int sum = 0;
-        for (int l = 1, r = 2;l < r;) {
+        for (int l = 1, r = 2; l < r; ) {
             sum = (l + r) * (r - l + 1) / 2;
             if (sum > target) {
                 l++;
             } else if (sum == target) {
                 int[] res = new int[r - l + 1];
-                for (int k = l;k <= r;k++) {
+                for (int k = l; k <= r; k++) {
                     res[k - l] = k;
                 }
                 ans.add(res);
@@ -964,6 +984,7 @@ public class LCodeSolution {
         dfs236(root, p, q);
         return ans236;
     }
+
     boolean dfs236(TreeNode root, TreeNode p, TreeNode q) {
         /**
          * 深度搜索树中是否包含 p 或 q
@@ -994,6 +1015,7 @@ public class LCodeSolution {
 
     // 102 & offer 32-2
     List<List<Integer>> ans102 = new ArrayList<>();
+
     public List<List<Integer>> levelOrder(TreeNode root) {
         /**
          * 1、队列  广度优先搜索
@@ -1022,6 +1044,7 @@ public class LCodeSolution {
         lever(root, 0);
         return ans102;
     }
+
     void lever(TreeNode root, int k) {
         if (root != null) {
             if (ans102.size() <= k)
@@ -1062,7 +1085,7 @@ public class LCodeSolution {
             } else if (sum < target) {
                 low++;
             } else {
-                return new int[] {nums[low], nums[high]};
+                return new int[]{nums[low], nums[high]};
             }
         }
         return new int[0];
@@ -1143,7 +1166,7 @@ public class LCodeSolution {
     public int[] getLeastNumbers(int[] arr, int k) {
         Arrays.sort(arr);
         int[] ans = new int[k];
-        for (int i = 0;i < k;i++) {
+        for (int i = 0; i < k; i++) {
             ans[i] = arr[i];
         }
         return ans;
@@ -1155,7 +1178,7 @@ public class LCodeSolution {
          * 排序数组必二分查找
          */
         int count = 0, length = nums.length;
-        for (int i = 0;i < length;i++) {
+        for (int i = 0; i < length; i++) {
             if (nums[i] == target) {
                 count++;
             }
@@ -1182,7 +1205,7 @@ public class LCodeSolution {
 
     // offer 53-2
     public int missingNumber(int[] nums) {
-        for (int i = 0;i < nums.length;i++) {
+        for (int i = 0; i < nums.length; i++) {
             if (nums[i] != i) return i;
         }
         return nums.length;
@@ -1211,7 +1234,7 @@ public class LCodeSolution {
         while (!queue.isEmpty()) {
             List<Integer> res = new ArrayList<>();
             int length = queue.size();
-            for (int i = 0;i < length;i++){
+            for (int i = 0; i < length; i++) {
                 Node node = queue.poll();
                 res.add(node.val);
                 for (Node node1 : node.children) {
@@ -1253,7 +1276,7 @@ public class LCodeSolution {
         for (String string : words) {
             StringBuilder stringBuilder = new StringBuilder();
             int length = string.length();
-            for (int i = 0;i < length;i++) {
+            for (int i = 0; i < length; i++) {
                 char ch = string.charAt(i);
                 stringBuilder.append(MORSE[ch - 'a']);
             }
@@ -1285,14 +1308,14 @@ public class LCodeSolution {
     // 806
     public int[] numberOfLines(int[] widths, String s) {
         int sum = 0, count = 1;
-        for (int i = 0;i < s.length();i++) {
+        for (int i = 0; i < s.length(); i++) {
             sum += widths[s.charAt(i) - 'a'];
             if (sum > 100) {
                 sum = widths[s.charAt(i) - 'a'];
                 count++;
             }
         }
-        return new int[] {count, sum};
+        return new int[]{count, sum};
     }
 
     // 1047
@@ -1301,7 +1324,7 @@ public class LCodeSolution {
         //Deque的两个实现类   ArrayDeque LinkedList
         char ch;
         int length = s.length();
-        for (int i = 0;i < length;i++) {
+        for (int i = 0; i < length; i++) {
             ch = s.charAt(i);
             if (deque.isEmpty() || ch != deque.peek()) {
                 deque.push(ch);
@@ -1346,7 +1369,7 @@ public class LCodeSolution {
          * 2、迭代
          */
         int f = 0;
-        for (int i = 2;i < n + 1;i++) {
+        for (int i = 2; i < n + 1; i++) {
             f = (m + f) % i;
         }
         return f;
@@ -1366,7 +1389,7 @@ public class LCodeSolution {
                 return ch;
             }
         }
-        return  ' ';
+        return ' ';
     }
 
     // 110 & offer 55-2
@@ -1379,6 +1402,7 @@ public class LCodeSolution {
         return Math.abs(height(root.left) - height(root.right)) <= 1
                 && isBalanced(root.left) && isBalanced(root.right);
     }
+
     public int height(TreeNode root) {
         if (root == null) return 0;
         return Math.max(height(root.left), height(root.right)) + 1;
@@ -1402,6 +1426,7 @@ public class LCodeSolution {
         return ans;
 
     }
+
     public void constructPaths(TreeNode root, String path, List<String> ans) {
         if (root != null) {
             StringBuffer sb = new StringBuffer(path);
@@ -1438,7 +1463,7 @@ public class LCodeSolution {
         int length = paragraph.length(), maxFre = 0;
         StringBuilder builder = new StringBuilder();
         HashMap<String, Integer> fre = new HashMap<>();
-        for (int i = 0;i <= length;i++) {
+        for (int i = 0; i <= length; i++) {
             if (i < length && Character.isLetter(paragraph.charAt(i))) {
                 builder.append(Character.toLowerCase(paragraph.charAt(i)));
             } else if (builder.length() > 0) {
@@ -1470,13 +1495,13 @@ public class LCodeSolution {
     public int[] shortestToChar(String s, char c) {
         int length = s.length();
         int[] ans = new int[length];
-        for (int i = 0, index = -length;i < length;i++) {
+        for (int i = 0, index = -length; i < length; i++) {
             if (s.charAt(i) == c) {
                 index = i;
             }
             ans[i] = i - index;
         }
-        for (int i = length - 1, index = 2 * length;i >= 0;i--) {
+        for (int i = length - 1, index = 2 * length; i >= 0; i--) {
             if (s.charAt(i) == c) {
                 index = i;
             }
@@ -1517,14 +1542,14 @@ public class LCodeSolution {
                 b ^= n;
             }
         }
-        return new int[] {a, b};
+        return new int[]{a, b};
     }
 
     // 944
     public int minDeletionSize(String[] strs) {
         int ans = 0, row = strs.length, col = strs[0].length();
-        for (int i = 0;i < col;i++) {
-            for (int j = 1;j < row;j++) {
+        for (int i = 0; i < col; i++) {
+            for (int j = 1; j < row; j++) {
                 if (strs[j].charAt(i) < strs[j - 1].charAt(i)) {
                     ans++;
                     break;
@@ -1576,8 +1601,8 @@ public class LCodeSolution {
 //        }
 //        return count;
         int ans = 0;
-        for (int i = 1;i * i < 2 * n;i++) {
-            if (2 * n % i == 0 && (2 * n / i - i + 1) % 2== 0)
+        for (int i = 1; i * i < 2 * n; i++) {
+            if (2 * n % i == 0 && (2 * n / i - i + 1) % 2 == 0)
                 ans++;
         }
         return ans;
@@ -1614,6 +1639,7 @@ public class LCodeSolution {
         }
         return k;
     }
+
     int getTime(int[] piles, int speed) {
         int time = 0;
         for (int pile : piles) {
@@ -1641,7 +1667,7 @@ public class LCodeSolution {
         int[] next = new int[needle.length()];
         getNext(next, needle);
         int j = -1;
-        for (int i = 0;i < haystack.length();i++) {
+        for (int i = 0; i < haystack.length(); i++) {
             while (j >= 0 && haystack.charAt(i) != needle.charAt(j + 1)) {
                 j = next[j];
             }
@@ -1654,10 +1680,11 @@ public class LCodeSolution {
         }
         return -1;
     }
+
     public void getNext(int[] next, String s) {
         int j = -1;
         next[0] = j;
-        for (int i = 1;i < s.length();i++) {
+        for (int i = 1; i < s.length(); i++) {
             while (j >= 0 && s.charAt(i) != s.charAt(j + 1)) {
                 j = next[j];
             }
@@ -1705,7 +1732,7 @@ public class LCodeSolution {
         int res = 0;
         while (!deque.isEmpty()) {
             int size = deque.size();
-            for (int i = 0;i < size;i++) {
+            for (int i = 0; i < size; i++) {
                 TreeNode poll = deque.poll();
                 if (i == 0) {
                     res = poll.val;
@@ -1737,6 +1764,7 @@ public class LCodeSolution {
     public TreeNode constructMaximumBinaryTree(int[] nums) {
         return constructMaximumBinaryTree1(nums, 0, nums.length);
     }
+
     public TreeNode constructMaximumBinaryTree1(int[] nums, int leftIndex, int rightIndex) {
         if (rightIndex - leftIndex < 1) {
             return null;
@@ -1746,7 +1774,7 @@ public class LCodeSolution {
         }
         int maxIndex = leftIndex;
         int maxValue = nums[maxIndex];
-        for (int i = leftIndex + 1;i < rightIndex;i++) {
+        for (int i = leftIndex + 1; i < rightIndex; i++) {
             if (nums[i] > maxValue) {
                 maxValue = nums[i];
                 maxIndex = i;
@@ -1763,6 +1791,7 @@ public class LCodeSolution {
     int count;
     int maxCount;
     TreeNode pre;
+
     public int[] findMode(TreeNode root) {
         /*
          * @description:找出二叉树中的众数  二叉树中双指针
@@ -1777,11 +1806,12 @@ public class LCodeSolution {
         count = 0;
         findMode1(root);
         int[] res = new int[resList.size()];
-        for (int i = 0;i < resList.size();i++) {
+        for (int i = 0; i < resList.size(); i++) {
             res[i] = resList.get(i);
         }
         return res;
     }
+
     public void findMode1(TreeNode root) {
         if (root == null) {
             return;

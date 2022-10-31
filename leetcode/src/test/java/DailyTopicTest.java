@@ -15,4 +15,9 @@ public class DailyTopicTest {
     public void testCanConstruct() {
 //        dailyTopic.canConstruct("aaa", "abaca");
     }
+
+    @Test
+    public void testLetterCasePermutation() {
+        dailyTopic.letterCasePermutation("a1b1");
+    }
 }

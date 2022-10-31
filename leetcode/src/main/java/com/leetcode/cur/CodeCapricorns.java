@@ -580,7 +580,42 @@ public class CodeCapricorns {
         return new String(chars);
     }
 
+    /**
+     * @Description: 151. 反转字符串中的单词
+     * @author pwz
+     * @date 2022/10/31 11:07
+     */
+    public String reverseWords(String s) {
+        s = s.trim();
+        StringBuilder sb = new StringBuilder(s);
+        reverse(sb, 0, sb.length() - 1);
+        int start = 0;
+        for (int i = 0; i < sb.length(); i++) {
+            if (sb.charAt(i) == ' ' && sb.charAt(i - 1) != ' ') {
+                reverse(sb, start, i - 1);
+            }
+            if (sb.charAt(i) == ' ' && sb.charAt(i + 1) != ' ') {
+                start = i + 1;
+            }
+        }
+        StringBuilder res = new StringBuilder();
+        for (int i = 0; i < sb.length(); i++) {
+            if (sb.charAt(i) != ' ' || res.charAt(res.length() - 1) != ' ') {
+                res.append(sb.charAt(i));
+            }
+        }
+        return res.toString();
+    }
 
+    private void reverse(StringBuilder sb, int start, int end) {
+        while (start < end) {
+            char ch = sb.charAt(start);
+            sb.setCharAt(start, sb.charAt(end));
+            sb.setCharAt(end, ch);
+            start++;
+            end--;
+        }
+    }
 
 
 

@@ -1,6 +1,8 @@
 package com.leetcode.cur;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -298,10 +300,33 @@ public class Hot100 {
         return res;
     }
 
+    /**
+     * @Description: 200. 岛屿数量
+     * @author pwz
+     * @date 2022/10/31 10:16
+     */
+    public int numIslands(char[][] grid) {
+        int res = 0;
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if (grid[i][j] == '1') {
+                    dfs(grid, i, j);
+                    res++;
+                }
+            }
+        }
+        return res;
+    }
 
-
-
-
+    private void dfs(char[][] grid, int i, int j) {
+        int r = grid.length, c = grid[0].length;
+        if (i < 0 || j < 0 || i >= r || j >= c || grid[i][j] == '0') return;
+        grid[i][j] = '0';
+        dfs(grid, i - 1, j);
+        dfs(grid, i, j + 1);
+        dfs(grid, i + 1, j);
+        dfs(grid, i, j - 1);
+    }
 
 
 }
