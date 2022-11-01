@@ -20,4 +20,9 @@ public class Hot100Test {
         hot100.lengthOfLongestSubstring_1("abcddd");
     }
 
+
+    @Test
+    public void testCanFinish() {
+        System.out.println(hot100.canFinish(3, new int[][]{{1, 0}, {2, 1}, {0, 2}}));
+    }
 }

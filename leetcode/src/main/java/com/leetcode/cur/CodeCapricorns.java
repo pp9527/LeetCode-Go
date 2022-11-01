@@ -455,7 +455,7 @@ public class CodeCapricorns {
      * @date 2022/10/27 13:11
      */
     public boolean canConstruct(String ransomNote, String magazine) {
-        int[] arr = new int [26];
+        int[] arr = new int[26];
         for (char i : magazine.toCharArray()) {
             arr[i - 'a']++;
         }
@@ -494,7 +494,7 @@ public class CodeCapricorns {
                 if ((long) nums[i] + nums[nums.length - 1] + nums[nums.length - 2] + nums[j] < target) continue;
                 int left = j + 1, right = nums.length - 1;
                 while (left < right) {
-                    long sum =  (long) nums[i] + nums[j] + nums[left] + nums[right];
+                    long sum = (long) nums[i] + nums[j] + nums[left] + nums[right];
                     if (sum > target) {
                         right--;
                     } else if (sum < target) {
@@ -617,6 +617,82 @@ public class CodeCapricorns {
         }
     }
 
+    /**
+     * @Description: 剑指 Offer 58 - II. 左旋转字符串
+     * @author pwz
+     * @date 2022/11/1 9:29
+     */
+    public String reverseLeftWords(String s, int n) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = n; i < n + s.length(); i++) {
+            sb.append(s.charAt(i % s.length()));
+        }
+        return sb.toString();
+    }
+
+    /**
+     * @Description: 28. 找出字符串中第一个匹配项的下标
+     * @author pwz
+     * @date 2022/11/1 9:30
+     */
+    public int strStr(String haystack, String needle) {
+        int[] next = getNext(needle);
+        int j = -1;
+        for (int i = 0; i < haystack.length(); i++) {
+            while (j >= 0 && haystack.charAt(i) != needle.charAt(j + 1)) {
+                j = next[j];
+            }
+            if (haystack.charAt(i) == needle.charAt(j + 1)) {
+                j++;
+            }
+            if (j == needle.length() - 1) {
+                return i - needle.length() + 1;
+            }
+        }
+        return -1;
+    }
+
+    private int[] getNext(String needle) {
+        int[] next = new int[needle.length()];
+        int j = -1;
+        next[0] = -1;
+        for (int i = 1; i < needle.length(); i++) {
+            while (j >= 0 && needle.charAt(i) != needle.charAt(j + 1)) {
+                j = next[j];
+            }
+            if (needle.charAt(i) == needle.charAt(j + 1)) {
+                j++;
+            }
+            next[i] = j;
+        }
+        return next;
+    }
+
+    /**
+     * @Description: 459. 重复的子字符串
+     * @author pwz
+     * @date 2022/11/1 9:31
+     */
+    public boolean repeatedSubstringPattern(String s) {
+        int[] next = new int[s.length()];
+        next[0] = -1;
+        int j = -1;
+        for (int i = 1; i < s.length(); i++) {
+            while (j >= 0 && s.charAt(i) != s.charAt(j + 1)) {
+                j = next[j];
+            }
+            if (s.charAt(i) == s.charAt(j + 1)) {
+                j++;
+            }
+            next[i] = j;
+        }
+        if (next[next.length - 1] != -1 &&
+                s.length() % (s.length() - (next[next.length - 1] + 1)) == 0) {
+            return true;
+        }
+        return false;
+    }
+
 
 
 
@@ -676,30 +752,6 @@ public class CodeCapricorns {
             if (edges[i] <= len && dfs(index + 1, matchsticks, edges, len))
                 return true;
             edges[i] -= matchsticks[index];
-        }
-        return false;
-    }
-
-    // 459
-    public boolean repeatedSubstringPattern(String s) {
-        if (s.equals("")) {
-            return false;
-        }
-        int len = s.length();
-        s = " " + s;
-        char[] chars = s.toCharArray();
-        int[] next = new int[len + 1];
-        for (int i = 2, j = 0; i <= len; i++) {
-            while (j > 0 && chars[i] != chars[j + 1]) {
-                j = next[j];
-            }
-            if (chars[i] == chars[j + 1]) {
-                j++;
-            }
-            next[i] = j;
-        }
-        if (next[len] > 0 && len % (len - next[len]) == 0) {
-            return true;
         }
         return false;
     }

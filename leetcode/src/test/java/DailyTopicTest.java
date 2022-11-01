@@ -20,4 +20,9 @@ public class DailyTopicTest {
     public void testLetterCasePermutation() {
         dailyTopic.letterCasePermutation("a1b1");
     }
+
+    @Test
+    public void testArrayStringsAreEqual() {
+        dailyTopic.arrayStringsAreEqual(new String[]{"ab", "c"}, new String[]{"a", "bc"});
+    }
 }

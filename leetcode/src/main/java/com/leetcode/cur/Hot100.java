@@ -328,5 +328,41 @@ public class Hot100 {
         dfs(grid, i, j - 1);
     }
 
+    /**
+     * @Description: 207. 课程表
+     * @author pwz
+     * @date 2022/11/1 10:40
+     */
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        List<List<Integer>> edges = new ArrayList<List<Integer>>();
+        boolean valid = true;
+        for (int i = 0; i < numCourses; ++i) {
+            edges.add(new ArrayList<Integer>());
+        }
+        int[] visited = new int[numCourses];
+        for (int[] info : prerequisites) {
+            edges.get(info[1]).add(info[0]);
+        }
+        for (int i = 0; i < numCourses && valid; ++i) {
+            if (visited[i] == 0) {
+                valid = dfs(edges, visited, i);
+            }
+        }
+        return valid;
+    }
 
+    private boolean dfs(List<List<Integer>> edges, int[] visited, int index) {
+        visited[index] = 1;
+        for (int v : edges.get(index)) {
+            if (visited[v] == 0) {
+                if (!dfs(edges, visited, v)) {
+                    return false;
+                }
+            } else if (visited[v] == 1) {
+                return false;
+            }
+        }
+        visited[index] = 2;
+        return true;
+    }
 }
