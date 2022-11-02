@@ -25,4 +25,9 @@ public class Hot100Test {
     public void testCanFinish() {
         System.out.println(hot100.canFinish(3, new int[][]{{1, 0}, {2, 1}, {0, 2}}));
     }
+
+    @Test
+    public void testFindKthLargest() {
+        hot100.findKthLargest(new int[]{3, 2, 1, 5, 6, 4}, 2);
+    }
 }

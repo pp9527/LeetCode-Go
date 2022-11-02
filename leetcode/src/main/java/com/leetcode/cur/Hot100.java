@@ -1,9 +1,6 @@
 package com.leetcode.cur;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author: pwz
@@ -364,5 +361,47 @@ public class Hot100 {
         }
         visited[index] = 2;
         return true;
+    }
+
+    /**
+     * @Description: 215. 数组中的第K个最大元素
+     * @author pwz
+     * @date 2022/11/2 10:55
+     */
+    public int findKthLargest(int[] nums, int k) {
+        int left = 0, len = nums.length, right = len - 1;
+        while (true) {
+            int randomIndex = partition(nums, left, right);
+            if (randomIndex == len - k) {
+                return nums[randomIndex];
+            } else if (randomIndex > len - k) {
+                right = randomIndex - 1;
+            } else {
+                left = randomIndex + 1;
+            }
+        }
+    }
+    private int partition(int[] nums, int left, int right) {
+        Random random = new Random();
+        int randomIndex = left + random.nextInt(right - left + 1);
+        int le = left + 1, ge = right;
+        swap(nums, left, randomIndex);
+        int pivot = nums[left];
+        while (true) {
+            while (le <= ge && nums[le] < pivot) {
+                le++;
+            }
+            while (le <= ge && nums[ge] > pivot) {
+                ge--;
+            }
+            if (le >= ge) {
+                break;
+            }
+            swap (nums, le, ge);
+            le++;
+            ge--;
+        }
+        swap(nums, left, ge);
+        return ge;
     }
 }

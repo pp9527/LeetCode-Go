@@ -114,5 +114,44 @@ public class DailyTopic {
         return sb1.toString().compareTo(sb2.toString()) == 0;
     }
 
+    /**
+     * @Description: 1620. 网络信号最好的坐标
+     * @author pwz
+     * @date 2022/11/2 10:09
+     */
+    public int[] bestCoordinate(int[][] towers, int radius) {
+        int xMax = Integer.MIN_VALUE, yMax = Integer.MIN_VALUE;
+        int xMin = Integer.MAX_VALUE, yMin = Integer.MAX_VALUE;
+        for (int[] i : towers) {
+            xMax = Math.max(i[0], xMax);
+            yMax = Math.max(i[1], yMax);
+            xMin = Math.min(i[0], xMin);
+            yMin = Math.min(i[1], yMin);
+        }
+        int cx = 0, cy = 0;
+        double maxPower = 0;
+        for (int i = xMin; i <= xMax; i++) {
+            for (int j = yMin; j <= yMax; j++) {
+                int[] coordinate = {i, j};
+                double power = 0;
+                for (int[] tower : towers) {
+                    double distance = getDistance(tower, coordinate);
+                    if (distance <= radius * radius) {
+                        power += Math.floor(tower[2] / (1 + Math.sqrt(distance)));
+                    }
+                }
+                if (power > maxPower) {
+                    cx = i;
+                    cy = j;
+                    maxPower = power;
+                }
+            }
+        }
+        return new int[]{cx, cy};
+    }
 
+    private int getDistance(int[] tower, int[] coordinate) {
+        return (tower[0] - coordinate[0]) * (tower[0] - coordinate[0])
+                + (tower[1] - coordinate[1]) * (tower[1] - coordinate[1]);
+    }
 }
