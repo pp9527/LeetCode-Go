@@ -30,4 +30,15 @@ public class Hot100Test {
     public void testFindKthLargest() {
         hot100.findKthLargest(new int[]{3, 2, 1, 5, 6, 4}, 2);
     }
+
+    @Test
+    public void testMaximalSquare() {
+        char[][] chars = {
+                {'1', '0', '1', '0', '0'},
+                {'1', '0', '1', '1', '1'},
+                {'1', '1', '1', '1', '1'},
+                {'1', '0', '0', '1', '0'}
+        };
+        int i = hot100.maximalSquare(chars);
+    }
 }

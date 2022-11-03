@@ -154,4 +154,19 @@ public class DailyTopic {
         return (tower[0] - coordinate[0]) * (tower[0] - coordinate[0])
                 + (tower[1] - coordinate[1]) * (tower[1] - coordinate[1]);
     }
+
+    /**
+     * @Description: 1668. 最大重复子字符串
+     * @author pwz
+     * @date 2022/11/3 10:25
+     */
+    public int maxRepeating(String sequence, String word) {
+        int res = 0;
+        String str = word;
+        while (sequence.contains(str)) {
+            str += word;
+            res++;
+        }
+        return res;
+    }
 }
