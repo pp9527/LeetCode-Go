@@ -25,4 +25,9 @@ public class DailyTopicTest {
     public void testArrayStringsAreEqual() {
         dailyTopic.arrayStringsAreEqual(new String[]{"ab", "c"}, new String[]{"a", "bc"});
     }
+
+    @Test
+    public void test() {
+        dailyTopic.shortestPathAllKeys(new String[]{"@..aA","..B#.","....b"});
+    }
 }

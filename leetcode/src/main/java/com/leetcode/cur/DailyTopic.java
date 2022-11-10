@@ -1,8 +1,9 @@
 package com.leetcode.cur;
 
 
-import java.util.ArrayList;
-import java.util.List;
+import sun.text.resources.cldr.ti.FormatData_ti;
+
+import java.util.*;
 
 /**
  * @author: pwz
@@ -168,5 +169,62 @@ public class DailyTopic {
             res++;
         }
         return res;
+    }
+
+    /**
+     * @Description: 754. 到达终点数字
+     * @author pwz
+     * @date 2022/11/4 10:23
+     */
+    public int reachNumber(int target) {
+        int sum = 0;
+        target = Math.abs(target);
+        int k = 0;
+        while (sum < target || (sum - target) % 2 != 0) {
+            k++;
+            sum += k;
+        }
+        return k;
+    }
+
+    /**
+     * @Description: 864. 获取所有钥匙的最短路径
+     * @author pwz
+     * @date 2022/11/10 10:41
+     */
+    public int shortestPathAllKeys(String[] grid) {
+        int N = 30, K = 6, INF = 0x3f3f3f3f;
+        int[][] dirs = new int[][]{{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+        int[][][] dist = new int[N][N][1 << K];
+        int n = grid.length, m = grid[0].length(), cnt = 0;
+        Deque<int[]> deque = new ArrayDeque<>();
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                Arrays.fill(dist[i][j], INF);
+                char ch = grid[i].charAt(j);
+                if (ch == '@') {
+                    deque.addLast(new int[]{i, j, 0});
+                    dist[i][j][0] = 0;
+                } else if (ch >= 'a' && ch <= 'z') cnt++;
+            }
+        }
+        while (!deque.isEmpty()) {
+            int[] info = deque.pollFirst();
+            int x = info[0], y = info[1], cur = info[2], step = dist[x][y][cur];
+            for (int[] dir : dirs) {
+                int nx = x + dir[0], ny = y + dir[1];
+                if (nx < 0 || nx >= n || ny < 0 || ny >= m) continue;
+                char ch = grid[nx].charAt(ny);
+                if (ch == '#') continue;
+                if ((ch >= 'A' && ch <= 'Z') && (cur >> (ch - 'A') & 1) == 0) continue;
+                int nCur = cur;
+                if (ch >= 'a' && ch <= 'z') nCur |= 1 << (ch - 'a');
+                if (nCur == (1 << cnt) - 1) return step + 1;
+                if (step + 1 >= dist[nx][ny][nCur]) continue;
+                dist[nx][ny][nCur] = step + 1;
+                deque.addLast(new int[]{nx, ny, nCur});
+            }
+        }
+        return -1;
     }
 }

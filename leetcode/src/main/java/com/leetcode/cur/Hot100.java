@@ -434,7 +434,29 @@ public class Hot100 {
         return max * max;
     }
 
-
+    /**
+     * @Description: 4. 寻找两个正序数组的中位数
+     * @author pwz
+     * @date 2022/11/4 10:30
+     */
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int len1 = nums1.length, len2 = nums2.length;
+        int target = (len1 + len2) / 2;
+        int p1 = 0, p2 = 0;
+        double left = -1, right = -1;
+        for (int i = 0; i <= target; i++) {
+            left = right;
+            if (p1 < len1 && (p2 >= len2 || nums1[p1] < nums2[p2])) {
+                right = nums1[p1++];
+            } else {
+                right = nums2[p2++];
+            }
+        }
+        if ((len1 + len2) % 2 == 0) {
+            return (left + right) / 2;
+        }
+        return right;
+    }
 
 
 
